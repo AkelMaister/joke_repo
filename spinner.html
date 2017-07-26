@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Spinner</title>
+</head>
+<body style="transform: rotate(0deg);height: 400px;width: 400px;">
+<center><h1>How to my code work: </h1></center>
+<img src="https://d30y9cdsu7xlg0.cloudfront.net/png/1076395-200.png" style="width: 200px; height: 200px; position: fixed;top: 50%;left: 50%;margin-top: -100px;margin-left: -100px;"/>
+<button id="button" style="position: fixed;top: 105%;left: 69%;margin-top: -100px;margin-left: -100px;"> SPIN </button>
+</body>
+<script>
+
+var button = document.getElementById('button')
+var spin = false
+var body = document.getElementsByTagName('body')
+body = body[0]
+var deg = 0
+var wWidth = window.innerWidth
+var wHeight = window.innerHeight
+
+document.addEventListener('DOMContentLoaded', function() {
+	body.style.marginLeft = (wWidth - parseInt(body.style.width)) / 2 + "px"
+	body.style.marginTop = (wHeight - parseInt(body.style.height)) / 2 + "px"
+})
+button.addEventListener("mousedown", function(){
+    spin = true
+	console.log(true)
+},false)
+/* button.addEventListener("mousemove", function(){
+    if (spin) 
+		spin = false
+	
+},false) */
+button.addEventListener("mouseup", function(){
+    spin = false
+	console.log(false)
+})
+var t = setInterval(function(){
+	if (spin) {
+	if (deg == 360)
+		deg = 0
+	deg += 5
+	console.log(deg)
+    body.style.webkitTransform = 'rotate('+deg+'deg)'
+    body.style.mozTransform    = 'rotate('+deg+'deg)' 
+    body.style.msTransform     = 'rotate('+deg+'deg)' 
+    body.style.oTransform      = 'rotate('+deg+'deg)' 
+    body.style.transform       = 'rotate('+deg+'deg)' 
+}}, 5)
+</script>
+</html>
