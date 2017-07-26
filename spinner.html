@@ -4,8 +4,8 @@
 </head>
 <body style="transform: rotate(0deg);height: 400px;width: 400px;">
 <center><h1>How to my code work: </h1></center>
-<img src="https://d30y9cdsu7xlg0.cloudfront.net/png/1076395-200.png" style="width: 200px; height: 200px; position: fixed;top: 50%;left: 50%;margin-top: -100px;margin-left: -100px;"/>
-<button id="button" style="position: fixed;top: 105%;left: 69%;margin-top: -100px;margin-left: -100px;"> SPIN </button>
+<img id="button" src="https://d30y9cdsu7xlg0.cloudfront.net/png/1076395-200.png" style="width: 200px; height: 200px; position: fixed;top: 50%;left: 50%;margin-top: -100px;margin-left: -100px;"/>
+<!-- <button style="position: fixed;top: 105%;left: 69%;margin-top: -100px;margin-left: -100px;"> SPIN </button> -->
 </body>
 <script>
 
@@ -21,14 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
 	body.style.marginLeft = (wWidth - parseInt(body.style.width)) / 2 + "px"
 	body.style.marginTop = (wHeight - parseInt(body.style.height)) / 2 + "px"
 })
-button.addEventListener("mousedown", function(){
+button.addEventListener("mouseover", function(){
     spin = true
-	console.log(true)
 },false)
-button.addEventListener("mouseup", function(){
+button.addEventListener("mouseout", function(){
     spin = false
-	console.log(false)
 })
+function setRotate(el, deg) {
+		el.style.webkitTransform = 'rotate('+deg+'deg)'
+		el.style.mozTransform    = 'rotate('+deg+'deg)' 
+		el.style.msTransform     = 'rotate('+deg+'deg)' 
+		el.style.oTransform      = 'rotate('+deg+'deg)' 
+		el.style.transform       = 'rotate('+deg+'deg)' 
+}
 var t = setInterval(function(){
 	if (spin) {
 		if (deg >= 360)
@@ -37,19 +42,11 @@ var t = setInterval(function(){
 			accelerate += 1
 		}
 		deg += accelerate
-		body.style.webkitTransform = 'rotate('+deg+'deg)'
-		body.style.mozTransform    = 'rotate('+deg+'deg)' 
-		body.style.msTransform     = 'rotate('+deg+'deg)' 
-		body.style.oTransform      = 'rotate('+deg+'deg)' 
-		body.style.transform       = 'rotate('+deg+'deg)' 
+		setRotate(body, deg)
 	} else if(accelerate > 0){
-		accelerate -= 1
+		accelerate -= 0.25
 		deg += accelerate
-		body.style.webkitTransform = 'rotate('+deg+'deg)'
-		body.style.mozTransform    = 'rotate('+deg+'deg)' 
-		body.style.msTransform     = 'rotate('+deg+'deg)' 
-		body.style.oTransform      = 'rotate('+deg+'deg)' 
-		body.style.transform       = 'rotate('+deg+'deg)' 
+		setRotate(body, deg)
 	}
 }, 10)
 </script>
