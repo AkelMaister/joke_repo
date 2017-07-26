@@ -8,6 +8,9 @@
 <!-- <button style="position: fixed;top: 105%;left: 69%;margin-top: -100px;margin-left: -100px;"> SPIN </button> -->
 </body>
 <script>
+var maxAccelerate = 20
+var deltaAccelerateInc = 1
+var deltaAccelerateDecr = 0.25
 var button = document.getElementById('button')
 var spin = false
 var body = document.getElementsByTagName('body')[0]
@@ -15,6 +18,7 @@ var deg = 0
 var wWidth = window.innerWidth
 var wHeight = window.innerHeight
 var accelerate = 0
+var intervalMs = 10
 document.addEventListener('DOMContentLoaded', function() {
 	body.style.marginLeft = (wWidth - parseInt(body.style.width)) / 2 + "px"
 	body.style.marginTop = (wHeight - parseInt(body.style.height)) / 2 + "px"
@@ -36,16 +40,16 @@ var t = setInterval(function(){
 	if (spin) {
 		if (deg >= 360)
 			deg = deg - 360
-		if (accelerate < 20) {
-			accelerate += 1
+		if (accelerate < maxAccelerate) {
+			accelerate += deltaAccelerateInc
 		}
 		deg += accelerate
 		setRotate(body, deg)
 	} else if(accelerate > 0){
-		accelerate -= 0.25
+		accelerate -= deltaAccelerateDecr
 		deg += accelerate
 		setRotate(body, deg)
 	}
-}, 10)
+}, intervalMs)
 </script>
 </html>
